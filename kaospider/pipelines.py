@@ -10,7 +10,7 @@ def dbInfo(db):
     conn = pymysql.connect(
         host = 'localhost',
         user = 'root',
-        passwd = '218906',
+        passwd = 'yang218906',
         charset = 'utf8mb4',
         use_unicode = False,
         db = db
@@ -24,7 +24,9 @@ class KaospiderPipeline(object):
         conn = dbInfo('emoji')
         cursor = conn.cursor()
         cursor.execute("SET NAMES utf8mb4")
-        cursor.execute("create table if not exists %s(id int NOT NULL AUTO_INCREMENT primary key,emoji char(100),text_english char(100),text_chinese char(100))" % (table))
+        cursor.execute(
+            "create table if not exists %s(id int NOT NULL AUTO_INCREMENT primary key,emoji char(100),text_english char(100),text_chinese char(100))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;" 
+            % (table))
         conn.commit()
         cursor.execute('insert into %s(emoji,text_english) values("%s","%s")'
                         % (table, emoji, textEnglish))
@@ -45,7 +47,7 @@ class pipeline2(object):
         cursor = conn.cursor()
         cursor.execute("SET NAMES utf8mb4")
         cursor.execute(
-            "create table if not exists %s(id int NOT NULL AUTO_INCREMENT primary key,kaomoji char(100),text_japanese char(100),text_chinese char(100))" % (table))
+            "create table if not exists %s(id int NOT NULL AUTO_INCREMENT primary key,kaomoji char(100),text_japanese char(100),text_chinese char(100))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;" % (table))
         conn.commit()
         cursor.execute('insert into %s(kaomoji,text_japanese) values("%s","%s")'
                         % (table, kaomoji, textJapanese))

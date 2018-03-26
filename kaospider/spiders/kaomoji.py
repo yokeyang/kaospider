@@ -13,7 +13,8 @@ class kaomoji(scrapy.Spider):
 
     def parse(self, response):
         html = response.xpath("//div[@id='cate_table']")
-        links = html.xpath("//dl//a/@href").extract()
+        dd = html.xpath("//dl//dd").extract()[-3]
+        links = Selector(text=dd).xpath('//a/@href').extract()
         for link in links:
             l = u'http://' + self.allowed_domains[0] + link
             yield scrapy.Request(l, callback=self.parse_item, dont_filter=True)
@@ -28,5 +29,5 @@ class kaomoji(scrapy.Spider):
             kaomoji = Selector(text=td).xpath('//text()').extract()[0].encode().decode()
             item['kaomoji'] = kaomoji
             item['text_japanese'] = text_japanese
-            item['table'] = table
+            item['table'] = table + 'acters'
             yield item

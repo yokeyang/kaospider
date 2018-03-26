@@ -71,8 +71,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'kaospider.pipelines.KaospiderPipeline': 300,
-#    'kaospider.pipelines.pipeline2': 300,
+#    'kaospider.pipelines.KaospiderPipeline': 300,
+   'kaospider.pipelines.pipeline2': 300,
 }
 FEED_EXPORT_ENCODING = 'utf-8'
 # Enable and configure the AutoThrottle extension (disabled by default)
